@@ -1,0 +1,6 @@
+{
+  "name": "فرنیچر و شیٹ کٹنگ لاگت کیلکولیٹر",
+  "description": "لکڑی، ایم ڈی ایف، پلائی ووڈ شیٹس کٹنگ، ایج بینڈنگ، ہارڈ ویئر اور فرنیچر لاگت کا جدید تخمینہ کار بمع لائیو کٹنگ نقشہ اور کوٹیشن رسید۔",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
