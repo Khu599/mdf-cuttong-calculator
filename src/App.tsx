@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+mport React, { useState } from 'react';
 
 export default function App() {
   const [sheetLength, setSheetLength] = useState(96);
@@ -11,13 +11,13 @@ export default function App() {
   const [laborCost, setLaborCost] = useState(3000);
 
   const [parts, setParts] = useState([{ length: 0, width: 0, qty: 1 }]);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState(null);
 
-  const handlePartChange = (index: number, field: string, value: number) => {
+  const handlePartChange = (index, field, value) => {
     const updated = [...parts];
-    (updated[index] as any)[field] = value;
+    updated[index][field] = value;
     setParts(updated);
   };
 
   const addPartRow = () => {
-    s…
+    setParts([...parts, { length: 0, width:…
