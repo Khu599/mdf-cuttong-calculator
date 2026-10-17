@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
-
-export default function App() {
-  const [sheetLength, setSheetLength] = useState(96);
-  const [sheetWidth, setSheetWidth] = useState(48);
-  const [sheetCost, setSheetCost] = useState(5500);
-  const [kerf, setKerf] = useState(0.125);
-
-  const [cncRate, setCncRate] = useState(1500);
-  const [cncHours, setCncHours] = useState(2);
-  const [laborCost, setLaborCost] = useState(3000);
-
-  const [parts, setParts] = useState([{ length: 0, width: 0, qty: 1 }]);
+const [parts, setParts] = useState([{ length: 0, width: 0, qty: 1 }]);
   const [results, setResults] = useState(null);
 
+  // حصوں (Parts) کی ویلیو تبدیل کرنے کا درست طریقہ
   const handlePartChange = (index, field, value) => {
-    const updated = parts.slice();
-    updated[index][field] = value;
+    const updated = [...parts];
+    updated[index] = { ...updated[index], [field]: Number(value) };
     setParts(updated);
   };
 
+  // نئی قطار (Row) شامل کرنے کا فنکشن
   const addPartRow = () => {
-    setParts([...parts, { length: 0, width:…
+    setParts([...parts, { length: 0, width: 0, qty: 1 }]);
+  };
+
+  // کسی قطار کو ڈیلیٹ کرنے کا فنکشن
+  const removePartRow = (index) => {
+    const updated = parts.filter((_, i) => i !== index);
+    setParts(updated);
+  };
