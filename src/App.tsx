@@ -1,20 +1,29 @@
-const [parts, setParts] = useState([{ length: 0, width: 0, qty: 1 }]);
-  const [results, setResults] = useState(null);
+import { useState } from "react";
 
-  // حصوں (Parts) کی ویلیو تبدیل کرنے کا درست طریقہ
-  const handlePartChange = (index, field, value) => {
-    const updated = [...parts];
-    updated[index] = { ...updated[index], [field]: Number(value) };
-    setParts(updated);
-  };
+type Part = { length: number; width: number; qty: number };
+type Placed = { x: number; y: number; w: number; h: number; id: number };
+type Result = {
+  sheets: Placed[][];
+  wastePercent: number;
+  error: string;
+};
 
-  // نئی قطار (Row) شامل کرنے کا فنکشن
-  const addPartRow = () => {
-    setParts([...parts, { length: 0, width: 0, qty: 1 }]);
-  };
+function packParts(
+  parts: Part[],
+  sheetLength: number,
+  sheetWidth: number,
+  kerf: number
+): Result {
+  const W = Math.max(sheetLength, sheetWidth);
+  const H = Math.min(sheetLength, sheetWidth);
 
-  // کسی قطار کو ڈیلیٹ کرنے کا فنکشن
-  const removePartRow = (index) => {
-    const updated = parts.filter((_, i) => i !== index);
-    setParts(updated);
-  };
+  const items: { id: number; a: number; b: number }[] = [];
+  parts.forEach((p, i) => {
+    if (p.length > 0 && p.width > 0) {
+      for (let q = 0; q < p.qty; q++) {
+        items.push({
+          id: i + 1,
+          a: Math.max(p.length, p.width),
+          b: Math.min(p.length, p.width),
+        });
+      }…
