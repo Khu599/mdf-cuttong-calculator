@@ -1,4 +1,4 @@
-mport React, { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function App() {
   const [sheetLength, setSheetLength] = useState(96);
@@ -14,7 +14,7 @@ export default function App() {
   const [results, setResults] = useState(null);
 
   const handlePartChange = (index, field, value) => {
-    const updated = [...parts];
+    const updated = parts.slice();
     updated[index][field] = value;
     setParts(updated);
   };
