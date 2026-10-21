@@ -1,29 +1,32 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-type Part = { length: number; width: number; qty: number };
-type Placed = { x: number; y: number; w: number; h: number; id: number };
-type Result = {
-  sheets: Placed[][];
-  wastePercent: number;
-  error: string;
+// ٹائپس کی تعریف (TypeScript Types)
+type Part = {
+  id: number;
+  length: number;
+  width: number;
+  qty: number;
 };
 
-function packParts(
-  parts: Part[],
-  sheetLength: number,
-  sheetWidth: number,
-  kerf: number
-): Result {
-  const W = Math.max(sheetLength, sheetWidth);
-  const H = Math.min(sheetLength, sheetWidth);
+type Sheet = {
+  length: number;
+  width: number;
+  kerf: number;
+};
 
-  const items: { id: number; a: number; b: number }[] = [];
-  parts.forEach((p, i) => {
-    if (p.length > 0 && p.width > 0) {
-      for (let q = 0; q < p.qty; q++) {
-        items.push({
-          id: i + 1,
-          a: Math.max(p.length, p.width),
-          b: Math.min(p.length, p.width),
-        });
-      }…
+export default function App() {
+  // شیٹ کا سائز (MDF Sheet Default Size: 2440mm x 1220mm)
+  const [sheet, setSheet] = useState<Sheet>({
+    length: 2440,
+    width: 1220,
+    kerf: 4, // بلیڈ کی کٹائی (Kerf)
+  });
+
+  // پارٹس کی لسٹ (MDF Parts List)
+  const [parts, setParts] = useState<Part[]>([
+    { id: 1, length: 1800, width: 900, qty: 1 }, // مثال: بیڈ بیس (Bed Base)
+  ]);
+
+  // پارٹ کی ویلیو تبدیل کرنے کا درست طریقہ
+  const handlePartChange = (index: number, field: keyof Part, value: number) => {
+    const updated = [...parts…
